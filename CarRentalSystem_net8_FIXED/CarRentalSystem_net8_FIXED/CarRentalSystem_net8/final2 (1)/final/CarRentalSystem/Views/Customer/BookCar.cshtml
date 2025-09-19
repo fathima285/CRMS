@@ -1,0 +1,122 @@
+@model CarRentalSystem.Models.ViewModels.BookingViewModel
+@{
+    ViewData["Title"] = "Book Car";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-calendar-plus"></i> Book Car
+                </h3>
+            </div>
+            <div class="card-body">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <!-- Car Information -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <img src="@Model.ImageUrl" alt="@Model.CarName" class="img-fluid" style="max-height: 130px; object-fit: contain;">
+                            }
+                            else
+                            {
+                                <i class="bi bi-car-front display-4 text-muted"></i>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h4>@Model.CarName</h4>
+                        <p class="text-muted">Model: @Model.CarModel</p>
+                        <p class="text-muted">
+                            <i class="bi bi-currency-dollar"></i> Rate: $50 per day
+                        </p>
+                    </div>
+                </div>
+
+                <form asp-action="BookCar" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="CarID" type="hidden" />
+                    <input asp-for="CarName" type="hidden" />
+                    <input asp-for="CarModel" type="hidden" />
+                    <input asp-for="ImageUrl" type="hidden" />
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="PickupDate" class="form-label">
+                                    <i class="bi bi-calendar-event"></i> Pickup Date
+                                </label>
+                                <input asp-for="PickupDate" class="form-control" type="date" />
+                                <span asp-validation-for="PickupDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="ReturnDate" class="form-label">
+                                    <i class="bi bi-calendar-check"></i> Return Date
+                                </label>
+                                <input asp-for="ReturnDate" class="form-control" type="date" />
+                                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <h6><i class="bi bi-info-circle"></i> Booking Summary</h6>
+                            <p class="mb-1"><strong>Car:</strong> @Model.CarName (@Model.CarModel)</p>
+                            <p class="mb-1"><strong>Rate:</strong> $50 per day</p>
+                            <p class="mb-0"><strong>Total Cost:</strong> <span id="totalCost">$0.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Cars" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to Cars
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Confirm Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function calculateTotal() {
+            const pickupDate = new Date(document.getElementById('PickupDate').value);
+            const returnDate = new Date(document.getElementById('ReturnDate').value);
+            
+            if (pickupDate && returnDate && returnDate > pickupDate) {
+                const timeDiff = returnDate.getTime() - pickupDate.getTime();
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                const totalCost = daysDiff * 50;
+                document.getElementById('totalCost').textContent = '$' + totalCost.toFixed(2);
+            } else {
+                document.getElementById('totalCost').textContent = '$0.00';
+            }
+        }
+
+        document.getElementById('PickupDate').addEventListener('change', calculateTotal);
+        document.getElementById('ReturnDate').addEventListener('change', calculateTotal);
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('PickupDate').setAttribute('min', today);
+        document.getElementById('ReturnDate').setAttribute('min', today);
+    </script>
+}

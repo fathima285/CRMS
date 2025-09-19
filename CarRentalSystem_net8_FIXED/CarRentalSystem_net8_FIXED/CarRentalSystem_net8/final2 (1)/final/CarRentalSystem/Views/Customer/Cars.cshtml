@@ -1,0 +1,73 @@
+@model IEnumerable<CarRentalSystem.Models.Car>
+@{
+    ViewData["Title"] = "Available Cars";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="bi bi-car-front"></i> Available Cars
+    </h2>
+</div>
+
+<div class="row">
+    @foreach (var car in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    @if (!string.IsNullOrEmpty(car.ImageUrl))
+                    {
+                        <img src="@car.ImageUrl" alt="@car.CarName" class="img-fluid" style="max-height: 180px; object-fit: contain;">
+                    }
+                    else
+                    {
+                        <i class="bi bi-car-front display-1 text-muted"></i>
+                    }
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@car.CarName</h5>
+                    <p class="card-text">
+                        <strong>Model:</strong> @car.CarModel<br>
+                        <strong>Status:</strong> 
+                        @if (car.IsAvailable)
+                        {
+                            <span class="badge bg-success">Available</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Not Available</span>
+                        }
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="bi bi-currency-dollar"></i> Starting from $50/day
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    @if (car.IsAvailable)
+                    {
+                        <a asp-action="BookCar" asp-route-id="@car.CarID" class="btn btn-primary w-100">
+                            <i class="bi bi-calendar-plus"></i> Book This Car
+                        </a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-secondary w-100" disabled>
+                            <i class="bi bi-x-circle"></i> Not Available
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5">
+        <i class="bi bi-car-front display-1 text-muted"></i>
+        <h3 class="text-muted">No cars available</h3>
+        <p class="text-muted">Sorry, there are no cars available for rental at the moment.</p>
+    </div>
+}

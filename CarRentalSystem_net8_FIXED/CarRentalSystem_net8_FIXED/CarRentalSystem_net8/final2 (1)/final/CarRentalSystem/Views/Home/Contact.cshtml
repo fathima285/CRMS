@@ -1,0 +1,210 @@
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">
+                <i class="bi bi-envelope"></i> Contact Us
+            </h1>
+            <p class="lead text-muted">We're here to help! Get in touch with our team</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mb-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-chat-dots"></i> Send us a Message
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+                    <form asp-action="Contact" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" name="firstName" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" name="lastName" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" name="phone" class="form-control" id="phone">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <select class="form-select" name="subject" id="subject" required>
+                                <option value="">Choose a subject</option>
+                                <option value="booking">Booking Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" name="message" id="message" rows="5" required 
+                                      placeholder="Please describe your inquiry in detail..."></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-geo-alt"></i> Our Location
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>Car Rental System</strong><br>
+                        123 Main Street<br>
+                        Business District<br>
+                        City, State 12345
+                    </p>
+                    <p class="text-muted small">
+                        <i class="bi bi-clock"></i> Open 24/7 for online bookings
+                    </p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-telephone"></i> Contact Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="text-primary">
+                            <i class="bi bi-phone"></i> Phone Support
+                        </h6>
+                        <p class="mb-0">+94 70 481 4390</p>
+                        <small class="text-muted">Available 24/7</small>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-primary">
+                            <i class="bi bi-envelope"></i> Email Support
+                        </h6>
+                        <p class="mb-0">support@carrentalsystem.com</p>
+                        <small class="text-muted">Response within 2 hours</small>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-primary">
+                            <i class="bi bi-chat-dots"></i> Live Chat
+                        </h6>
+                        <p class="mb-0">Available on website</p>
+                        <small class="text-muted">Mon-Fri 9AM-6PM</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clock"></i> Business Hours
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Monday - Friday</strong><br>
+                            <strong>Saturday</strong><br>
+                            <strong>Sunday</strong>
+                        </div>
+                        <div class="col-6">
+                            8:00 AM - 8:00 PM<br>
+                            9:00 AM - 6:00 PM<br>
+                            10:00 AM - 4:00 PM
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="mb-0 text-success">
+                        <i class="bi bi-check-circle"></i> 
+                        <strong>Online booking available 24/7</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body p-4 text-center">
+                    <h3 class="mb-3">Frequently Asked Questions</h3>
+                    <p class="lead mb-4">Can't find what you're looking for? Check our FAQ or contact us directly.</p>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-0 bg-white">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="bi bi-question-circle text-primary"></i> 
+                                        How do I book a car?
+                                    </h6>
+                                    <p class="card-text small text-muted">
+                                        Simply create an account, browse available cars, and select your dates.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-0 bg-white">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="bi bi-question-circle text-success"></i> 
+                                        What documents do I need?
+                                    </h6>
+                                    <p class="card-text small text-muted">
+                                        A valid driver's license and credit card are required for all rentals.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-0 bg-white">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="bi bi-question-circle text-warning"></i> 
+                                        Can I cancel my booking?
+                                    </h6>
+                                    <p class="card-text small text-muted">
+                                        Yes, you can cancel your booking up to 24 hours before pickup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

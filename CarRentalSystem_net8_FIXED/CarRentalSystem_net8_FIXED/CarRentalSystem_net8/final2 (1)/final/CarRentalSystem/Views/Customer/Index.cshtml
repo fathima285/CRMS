@@ -1,0 +1,100 @@
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-4 text-primary">
+            <i class="bi bi-speedometer2"></i> Customer Dashboard
+        </h1>
+        <p class="lead">Welcome to the Car Rental System</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">
+                            <i class="bi bi-car-front"></i> Browse Cars
+                        </h4>
+                        <p class="card-text">View available cars for rental</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-car-front display-4"></i>
+                    </div>
+                </div>
+                <a asp-action="Cars" class="btn btn-light">
+                    <i class="bi bi-arrow-right"></i> Browse Cars
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">
+                            <i class="bi bi-calendar-check"></i> My Bookings
+                        </h4>
+                        <p class="card-text">View and manage your bookings</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-calendar-check display-4"></i>
+                    </div>
+                </div>
+                <a asp-action="MyBookings" class="btn btn-light">
+                    <i class="bi bi-arrow-right"></i> My Bookings
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-info-circle"></i> How to Rent a Car
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-search display-4 text-primary"></i>
+                        </div>
+                        <h6>1. Browse Cars</h6>
+                        <p class="text-muted">View our available cars and select the one you like</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-calendar-event display-4 text-success"></i>
+                        </div>
+                        <h6>2. Select Dates</h6>
+                        <p class="text-muted">Choose your pickup and return dates</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-credit-card display-4 text-warning"></i>
+                        </div>
+                        <h6>3. Confirm Booking</h6>
+                        <p class="text-muted">Review the total cost and confirm your booking</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-check-circle display-4 text-info"></i>
+                        </div>
+                        <h6>4. Enjoy Your Ride</h6>
+                        <p class="text-muted">Pick up your car and enjoy your journey</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Welcome to Car Rental System";
+}
+
+<!-- Hero Section -->
+<div class="hero-section text-white py-5 mb-5" style="background: url('https://plus.unsplash.com/premium_photo-1737182592549-0c83f93e2903?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwdmVoaWNsZXxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat;">
+    <div class="container" style="backdrop-filter: brightness(0.95);">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-car-front"></i> Welcome to Car Rental System
+                </h1>
+                <p class="lead mb-4">
+                    Find the perfect car for your journey. Choose from our wide selection of vehicles 
+                    and enjoy a seamless rental experience.
+                </p>
+                <div class="d-flex gap-3">
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg">
+                        <i class="bi bi-person-plus"></i> Get Started
+                    </a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="display-5 fw-bold">Why Choose Our Car Rental Service?</h2>
+            <p class="lead text-muted">Experience the best in car rental with our premium features</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-car-front-fill text-primary display-4"></i>
+                    </div>
+                    <h5 class="card-title">Wide Selection</h5>
+                    <p class="card-text text-muted">
+                        Choose from our extensive fleet of modern vehicles including sedans, 
+                        SUVs, and luxury cars.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-shield-check text-success display-4"></i>
+                    </div>
+                    <h5 class="card-title">Safe & Reliable</h5>
+                    <p class="card-text text-muted">
+                        All our vehicles are regularly maintained and insured for your peace of mind.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-clock text-warning display-4"></i>
+                    </div>
+                    <h5 class="card-title">24/7 Support</h5>
+                    <p class="card-text text-muted">
+                        Our customer support team is available around the clock to assist you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="mb-2">Ready to Start Your Journey?</h4>
+                            <p class="mb-0 text-muted">Join thousands of satisfied customers who trust us for their car rental needs.</p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg">
+                                <i class="bi bi-rocket-takeoff"></i> Start Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Cars Preview -->
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h3 class="fw-bold">Popular Cars in Our Fleet</h3>
+            <p class="text-muted">Take a look at some of our most popular vehicles</p>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-3">
+                    <i class="bi bi-car-front text-primary display-6 mb-2"></i>
+                    <h6 class="card-title">Honda Civic 2024</h6>
+                    <p class="card-text small text-muted">Starting from $50/day</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-3">
+                    <i class="bi bi-car-front text-success display-6 mb-2"></i>
+                    <h6 class="card-title">Toyota Camry 2024</h6>
+                    <p class="card-text small text-muted">Starting from $50/day</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-3">
+                    <i class="bi bi-car-front text-warning display-6 mb-2"></i>
+                    <h6 class="card-title">Tesla Model 3 2024</h6>
+                    <p class="card-text small text-muted">Starting from $50/day</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-dark text-white py-5">
+    <div class="container text-center">
+        <h3 class="mb-3">Ready to Book Your Next Ride?</h3>
+        <p class="lead mb-4">Join our community and start exploring with our premium car rental service.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg">
+                <i class="bi bi-person-plus"></i> Create Account
+            </a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-box-arrow-in-right"></i> Sign In
+            </a>
+        </div>
+    </div>
+</div>

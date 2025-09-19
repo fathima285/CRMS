@@ -1,0 +1,145 @@
+@model IEnumerable<CarRentalSystem.Models.Booking>
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="bi bi-calendar-check"></i> My Bookings
+    </h2>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var booking in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                        @if (!string.IsNullOrEmpty(booking.Car.ImageUrl))
+                        {
+                            <img src="@booking.Car.ImageUrl" alt="@booking.Car.CarName" class="img-fluid" style="max-height: 130px; object-fit: contain;">
+                        }
+                        else
+                        {
+                            <i class="bi bi-car-front display-4 text-muted"></i>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@booking.Car.CarName</h5>
+                        <p class="card-text">
+                            <strong>Model:</strong> @booking.Car.CarModel<br>
+                            <strong>Booking ID:</strong> #@booking.BookingID<br>
+                            <strong>Pickup:</strong> @booking.PickupDate.ToString("MMM dd, yyyy")<br>
+                            <strong>Return:</strong> @booking.ReturnDate.ToString("MMM dd, yyyy")<br>
+                            <strong>Total Cost:</strong> <span class="badge bg-success">$@booking.TotalCost.ToString("F2")</span>
+                        </p>
+                        
+                        @{
+                            var today = DateTime.Today;
+                            var pickupDate = booking.PickupDate.Date;
+                            var returnDate = booking.ReturnDate.Date;
+                            string status;
+                            string statusClass;
+                            
+                            if (today < pickupDate)
+                            {
+                                status = "Upcoming";
+                                statusClass = "bg-info";
+                            }
+                            else if (today >= pickupDate && today <= returnDate)
+                            {
+                                status = "Active";
+                                statusClass = "bg-success";
+                            }
+                            else
+                            {
+                                status = "Completed";
+                                statusClass = "bg-secondary";
+                            }
+                        }
+                        
+                        <p class="card-text">
+                            <strong>Status:</strong> <span class="badge @statusClass">@status</span>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        @if (today < pickupDate)
+                        {
+                            <button type="button" class="btn btn-outline-danger w-100" 
+                                    onclick="confirmCancel(@booking.BookingID, '@booking.Car.CarName')">
+                                <i class="bi bi-x-circle"></i> Cancel Booking
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary w-100" disabled>
+                                <i class="bi bi-check-circle"></i> @status
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="text-center py-5">
+        <i class="bi bi-calendar-x display-1 text-muted"></i>
+        <h3 class="text-muted">No bookings found</h3>
+        <p class="text-muted">You haven't made any bookings yet.</p>
+        <a asp-action="Cars" class="btn btn-primary">
+            <i class="bi bi-car-front"></i> Browse Available Cars
+        </a>
+    </div>
+}
+
+<!-- Cancel Confirmation Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Cancellation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel your booking for <strong><span id="carName"></span></strong>?</p>
+                <p class="text-danger"><small>This action cannot be undone.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keep Booking</button>
+                <form id="cancelForm" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Cancel Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmCancel(bookingId, carName) {
+            document.getElementById('carName').textContent = carName;
+            document.getElementById('cancelForm').action = '@Url.Action("CancelBooking")/' + bookingId;
+            new bootstrap.Modal(document.getElementById('cancelModal')).show();
+        }
+    </script>
+}

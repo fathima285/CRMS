@@ -1,0 +1,110 @@
+@model IEnumerable<CarRentalSystem.Models.Car>
+@{
+    ViewData["Title"] = "Manage Cars";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="bi bi-car-front"></i> Manage Cars
+    </h2>
+    <a asp-action="AddCar" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add New Car
+    </a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    @foreach (var car in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    @if (!string.IsNullOrEmpty(car.ImageUrl))
+                    {
+                        <img src="@car.ImageUrl" alt="@car.CarName" class="img-fluid" style="max-height: 180px; object-fit: contain;">
+                    }
+                    else
+                    {
+                        <i class="bi bi-car-front display-1 text-muted"></i>
+                    }
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@car.CarName</h5>
+                    <p class="card-text">
+                        <strong>Model:</strong> @car.CarModel<br>
+                        <strong>Status:</strong> 
+                        @if (car.IsAvailable)
+                        {
+                            <span class="badge bg-success">Available</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Not Available</span>
+                        }
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100" role="group">
+                        <a asp-action="EditCar" asp-route-id="@car.CarID" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <button type="button" class="btn btn-outline-danger" onclick="confirmDelete(@car.CarID, '@car.CarName')">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5">
+        <i class="bi bi-car-front display-1 text-muted"></i>
+        <h3 class="text-muted">No cars found</h3>
+        <p class="text-muted">Start by adding your first car to the system.</p>
+        <a asp-action="AddCar" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Add First Car
+        </a>
+    </div>
+}
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the car "<span id="carName"></span>"?</p>
+                <p class="text-danger"><small>This action cannot be undone.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(carId, carName) {
+            document.getElementById('carName').textContent = carName;
+            document.getElementById('deleteForm').action = '@Url.Action("DeleteCar")/' + carId;
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        }
+    </script>
+}

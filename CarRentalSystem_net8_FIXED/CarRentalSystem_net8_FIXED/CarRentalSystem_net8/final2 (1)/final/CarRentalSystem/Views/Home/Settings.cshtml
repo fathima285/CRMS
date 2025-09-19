@@ -1,0 +1,233 @@
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">
+                <i class="bi bi-gear"></i> Settings
+            </h1>
+            <p class="lead text-muted">Customize your experience with our car rental system</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Privacy Settings -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-shield-check"></i> Privacy Settings
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                        <label class="form-check-label" for="emailNotifications">
+                            <strong>Email Notifications</strong>
+                            <br><small class="text-muted">Receive booking confirmations and updates via email</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="smsNotifications">
+                        <label class="form-check-label" for="smsNotifications">
+                            <strong>SMS Notifications</strong>
+                            <br><small class="text-muted">Receive important updates via text message</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="marketingEmails">
+                        <label class="form-check-label" for="marketingEmails">
+                            <strong>Marketing Communications</strong>
+                            <br><small class="text-muted">Receive promotional offers and special deals</small>
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="dataSharing" checked>
+                        <label class="form-check-label" for="dataSharing">
+                            <strong>Data Sharing</strong>
+                            <br><small class="text-muted">Allow sharing of anonymized data for service improvement</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Settings -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-display"></i> Display Settings
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label for="theme" class="form-label">
+                            <strong>Theme Preference</strong>
+                        </label>
+                        <select class="form-select" id="theme">
+                            <option value="light" selected>Light Theme</option>
+                            <option value="dark">Dark Theme</option>
+                            <option value="auto">Auto (System)</option>
+                        </select>
+                        <div class="form-text">Choose your preferred color scheme</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="language" class="form-label">
+                            <strong>Language</strong>
+                        </label>
+                        <select class="form-select" id="language">
+                            <option value="en" selected>English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                        <div class="form-text">Select your preferred language</div>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="compactView">
+                        <label class="form-check-label" for="compactView">
+                            <strong>Compact View</strong>
+                            <br><small class="text-muted">Use a more compact layout for better space utilization</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Preferences -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-check"></i> Booking Preferences
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label for="defaultPickupTime" class="form-label">
+                            <strong>Default Pickup Time</strong>
+                        </label>
+                        <select class="form-select" id="defaultPickupTime">
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00" selected>10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                        </select>
+                        <div class="form-text">Your preferred pickup time for new bookings</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="defaultRentalDays" class="form-label">
+                            <strong>Default Rental Duration</strong>
+                        </label>
+                        <select class="form-select" id="defaultRentalDays">
+                            <option value="1">1 Day</option>
+                            <option value="3" selected>3 Days</option>
+                            <option value="7">1 Week</option>
+                            <option value="14">2 Weeks</option>
+                            <option value="30">1 Month</option>
+                        </select>
+                        <div class="form-text">Default rental period for new bookings</div>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="autoExtend" checked>
+                        <label class="form-check-label" for="autoExtend">
+                            <strong>Auto-Extend Option</strong>
+                            <br><small class="text-muted">Show auto-extend option for long-term rentals</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-gear"></i> Account Settings
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label for="timezone" class="form-label">
+                            <strong>Timezone</strong>
+                        </label>
+                        <select class="form-select" id="timezone">
+                            <option value="UTC-8">Pacific Time (UTC-8)</option>
+                            <option value="UTC-7">Mountain Time (UTC-7)</option>
+                            <option value="UTC-6">Central Time (UTC-6)</option>
+                            <option value="UTC-5" selected>Eastern Time (UTC-5)</option>
+                            <option value="UTC+0">UTC (UTC+0)</option>
+                            <option value="UTC+1">Central European Time (UTC+1)</option>
+                        </select>
+                        <div class="form-text">Used for displaying dates and times</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="currency" class="form-label">
+                            <strong>Currency</strong>
+                        </label>
+                        <select class="form-select" id="currency">
+                            <option value="USD" selected>US Dollar ($)</option>
+                            <option value="EUR">Euro (€)</option>
+                            <option value="GBP">British Pound (£)</option>
+                            <option value="CAD">Canadian Dollar (C$)</option>
+                        </select>
+                        <div class="form-text">Currency for displaying prices</div>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                        <label class="form-check-label" for="twoFactorAuth">
+                            <strong>Two-Factor Authentication</strong>
+                            <br><small class="text-muted">Add an extra layer of security to your account</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Settings -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 text-center">
+                    <h5 class="mb-3">Save Your Settings</h5>
+                    <p class="text-muted mb-4">Your preferences will be saved and applied across all your devices.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="saveSettings()">
+                            <i class="bi bi-check-circle"></i> Save Settings
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg" onclick="resetSettings()">
+                            <i class="bi bi-arrow-clockwise"></i> Reset to Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function saveSettings() {
+            // Show success message
+            alert('Settings saved successfully!');
+        }
+
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all settings to default values?')) {
+                // Reset all form elements to default values
+                document.getElementById('emailNotifications').checked = true;
+                document.getElementById('smsNotifications').checked = false;
+                document.getElementById('marketingEmails').checked = false;
+                document.getElementById('dataSharing').checked = true;
+                document.getElementById('theme').value = 'light';
+                document.getElementById('language').value = 'en';
+                document.getElementById('compactView').checked = false;
+                document.getElementById('defaultPickupTime').value = '10:00';
+                document.getElementById('defaultRentalDays').value = '3';
+                document.getElementById('autoExtend').checked = true;
+                document.getElementById('timezone').value = 'UTC-5';
+                document.getElementById('currency').value = 'USD';
+                document.getElementById('twoFactorAuth').checked = false;
+                
+                alert('Settings have been reset to default values.');
+            }
+        }
+    </script>
+}
